@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="77fe8048-c2cc-4f19-92e3-b59b9c0d6239">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Escola"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString language="SQL">
+		<![CDATA[select 
+    a.nome,
+    a.data_nascimento,
+    d.nome nome_disciplina,
+    d.carga_horaria,
+    t.data_inicio,
+    t.data_fim,
+    at.codigo_validacao
+from aluno a
+join aluno_turma at on at.aluno_id = a.aluno_id
+join turma t on t.turma_id = at.turma_id
+join disciplina d on d.disciplina_id = t.disciplina_id]]>
+	</queryString>
+	<field name="NOME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOME"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOME"/>
+	</field>
+	<field name="DATA_NASCIMENTO" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="DATA_NASCIMENTO"/>
+		<property name="com.jaspersoft.studio.field.label" value="DATA_NASCIMENTO"/>
+	</field>
+	<field name="NOME_DISCIPLINA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOME_DISCIPLINA"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOME_DISCIPLINA"/>
+	</field>
+	<field name="CARGA_HORARIA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CARGA_HORARIA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CARGA_HORARIA"/>
+	</field>
+	<field name="DATA_INICIO" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="DATA_INICIO"/>
+		<property name="com.jaspersoft.studio.field.label" value="DATA_INICIO"/>
+	</field>
+	<field name="DATA_FIM" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="DATA_FIM"/>
+		<property name="com.jaspersoft.studio.field.label" value="DATA_FIM"/>
+	</field>
+	<field name="CODIGO_VALIDACAO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CODIGO_VALIDACAO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CODIGO_VALIDACAO"/>
+	</field>
+	<detail>
+		<band height="595" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image>
+				<reportElement x="0" y="0" width="842" height="595" uuid="92db312d-d86f-4a2e-9baa-6b44193bb82a"/>
+				<imageExpression><![CDATA["CURSO JASPER UDEMY/SEÇÃO 2 - CRIANDO UM RELATÓRIO NO JASPERSTUDIO/AULA 15 - RELATÓRIO DE CERTIFICADO - PÁGINA ÚNICA - BIBLIOTECAS EXTERNAS E QR CODES/Recursos/certificado/fundo_certificado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="183" width="842" height="40" uuid="6bd02e73-006c-4c42-a8c8-d718dc0c25e6"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Declaração de Participação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="240" width="842" height="30" uuid="2c515977-da04-432a-bf0b-5e5f86eb650b"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Declaramos que]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="279" width="841" height="40" uuid="bb7e5f68-d254-4183-bdf2-ef79a5beccd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="340" width="840" height="58" uuid="ae8e2bc6-8516-4b45-9755-f1ddb2aa7370"/>
+				<box leftPadding="30" rightPadding="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["concluiu o curso <b>" + $F{NOME_DISCIPLINA} + "</b>, realizado entre o período " +new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_INICIO}) + " e " + new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_FIM}) + " com carga horária de " + $F{CARGA_HORARIA} + "h"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="70" y="450" width="86" height="86" uuid="95dd3c1f-900a-48dd-9965-1fb0082a682f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+	new com.google.zxing.qrcode.QRCodeWriter().encode(
+		"https://meu-site.com/validar?=" + $F{CODIGO_VALIDACAO},
+		com.google.zxing.BarcodeFormat.QR_CODE, 300, 300
+	)
+)]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>
